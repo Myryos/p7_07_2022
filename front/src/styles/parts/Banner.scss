@@ -1,0 +1,12 @@
+@import '../variables.scss';
+
+header
+{
+    display: flex;
+    flex-direction: row;
+}
+header *
+{
+    margin: 0;
+    flex-direction: row;
+}
