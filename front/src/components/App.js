@@ -1,42 +1,30 @@
-import logo from '../assets/svg/icon-left-font.svg';
-import ThemeProvider from 'react-bootstrap/ThemeProvider'
-import{Link} from 'react-router-dom'
-import '../App.css'
+import { Route, Routes } from 'react-router-dom';
+import Header from './parts/Header'
+import Home from './pages/Home';
+import Login  from './pages/Login'
+import SignUp from './pages/Signup'
+import PublicationForms from './pages/publication_forms'
+import Publication from './pages/publication'
+import NoMatch from './pages/NoMatch'
+import { RequiredAuth } from './parts/RequiredAuth';
+import {AuthProvider} from '../contexts/Auth'
 
 function App() {
   return (
-    <ThemeProvider breakpoints={['xxl','xl','lg','md','sm']}>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-           Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-          Learn React
-          </a>
-          <nav
-          style={{
-          borderBottom: "solid 1px red",
-          paddingBottom: "1rem"} 
-          }>
-          <Link to="/login">TEST</Link>
-          <Link to="/signup">TEST 2</Link>
-          </nav>
-        </header>
-        <main>
-
-        </main>
-        <footer>
-
-        </footer>
-      </div> 
-    </ThemeProvider>
+    <AuthProvider>
+      <Header/>
+      <Routes>
+        
+        <Route path='/' element={<RequiredAuth><Home /></RequiredAuth>} />
+        <Route path='/new-publication' element={<RequiredAuth><PublicationForms /></RequiredAuth>} />
+        <Route path='/modify-publication/:id' element={<RequiredAuth><PublicationForms /></RequiredAuth>} />
+        <Route path='/publication/:id' element={<RequiredAuth><Publication /></RequiredAuth>} />
+        
+        <Route path='/login' element={<Login />}/>
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='*' element={<NoMatch />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 

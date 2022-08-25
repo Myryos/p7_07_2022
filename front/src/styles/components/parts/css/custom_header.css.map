@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAGA,MAAM,CAAC,GAAG;EAER,AAAA,GAAG,CACH;IACE,gBAAgB,ECLZ,OAAO;GDMZ;EACD,AAAA,SAAS,CACT;IACM,MAAM,EAAE,KAAK;GAClB;EACD,AAAA,QAAQ,CACR;IACE,KAAK,ECdA,OAAO,CDcG,UAAU;GAC1B",
+    "sources": [
+        "../custom_header.scss",
+        "../../../variable.scss"
+    ],
+    "names": [],
+    "file": "custom_header.css"
+}

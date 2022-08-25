@@ -1,0 +1,12 @@
+@media all {
+  nav {
+    background-color: #4E5166;
+  }
+  .img-logo {
+    height: 1.5em;
+  }
+  .navLink {
+    color: #FFD7D7 !important;
+  }
+}
+/*# sourceMappingURL=custom_header.css.map */

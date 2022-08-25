@@ -1,0 +1,23 @@
+@import '../../variable.scss';
+
+.likeButton
+{
+    color: $second !important;
+    background-color: $third !important;
+    border-color: $third !important;
+    box-shadow: 0 0 0 0.25rem $third !important;
+}
+
+.likeActive
+{
+    background-color: green !important;
+    border-color: green !important;
+    box-shadow: 0 0 0 0.25rem green !important;
+}
+
+.dislikeActive
+{
+    background-color: $first !important;
+    border-color: $first !important;
+    box-shadow: 0 0 0 0.25rem $first !important;
+}

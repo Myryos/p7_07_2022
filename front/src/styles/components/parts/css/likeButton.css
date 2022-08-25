@@ -1,0 +1,22 @@
+.likeButton {
+  color: #FFD7D7 !important;
+  background-color: #4E5166 !important;
+  border-color: #4E5166 !important;
+  -webkit-box-shadow: 0 0 0 0.25rem #4E5166 !important;
+          box-shadow: 0 0 0 0.25rem #4E5166 !important;
+}
+
+.likeActive {
+  background-color: green !important;
+  border-color: green !important;
+  -webkit-box-shadow: 0 0 0 0.25rem green !important;
+          box-shadow: 0 0 0 0.25rem green !important;
+}
+
+.dislikeActive {
+  background-color: #FD2D01 !important;
+  border-color: #FD2D01 !important;
+  -webkit-box-shadow: 0 0 0 0.25rem #FD2D01 !important;
+          box-shadow: 0 0 0 0.25rem #FD2D01 !important;
+}
+/*# sourceMappingURL=likeButton.css.map */

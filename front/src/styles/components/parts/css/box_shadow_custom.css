@@ -1,0 +1,5 @@
+.box_custom:focus {
+  -webkit-box-shadow: 0 0 0 0.25rem #FFD7D7 !important;
+          box-shadow: 0 0 0 0.25rem #FFD7D7 !important;
+}
+/*# sourceMappingURL=box_shadow_custom.css.map */

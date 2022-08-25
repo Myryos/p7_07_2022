@@ -1,0 +1,19 @@
+.cardTitle {
+  display: inline-block;
+  line-height: 0px;
+  border-radius: 50%;
+  border: 0.1em solid;
+  border-color: #FD2D01;
+  font-size: 1.5em;
+  background-color: #FFD7D7;
+}
+
+.cardTitle span {
+  display: inline-block;
+  padding-top: 50%;
+  padding-bottom: 50%;
+  margin-left: 8px;
+  margin-right: 8px;
+  color: #FD2D01;
+}
+/*# sourceMappingURL=Home.css.map */

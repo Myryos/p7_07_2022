@@ -1,0 +1,18 @@
+@import '../../variable.scss';
+
+
+@media all
+{
+  nav
+  {
+    background-color: $third;
+  }
+  .img-logo
+  {
+        height: 1.5em;
+  }
+  .navLink
+  {
+    color: $second !important;
+  }
+}

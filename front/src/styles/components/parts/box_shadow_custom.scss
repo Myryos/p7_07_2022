@@ -1,0 +1,8 @@
+@import '../../variable.scss';
+
+
+
+.box_custom:focus
+{
+    box-shadow: 0 0 0 0.25rem $second !important;
+}

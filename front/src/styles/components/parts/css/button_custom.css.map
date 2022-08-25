@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,WAAW,CACX;EACI,KAAK,ECJA,OAAO,CDIG,UAAU;CAC5B",
+    "sources": [
+        "../button_custom.scss",
+        "../../../variable.scss"
+    ],
+    "names": [],
+    "file": "button_custom.css"
+}
