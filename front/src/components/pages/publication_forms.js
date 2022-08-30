@@ -28,7 +28,6 @@ function Publication_Forms()
         
         if(param.id != null || undefined)
         {
-            console.log('Je suis un dieu')
             //appel api getOne en fonction du parametre
             publicationService.getOne(param.id, headers)
             .then((res) =>{
@@ -74,7 +73,7 @@ function Publication_Forms()
         fData.append("text", txt)
         fData.append("image", file)
         publicationService.newPublication(fData, headers)
-        .then( navigate('/', {replace: true}))
+        .then(navigate("/"))
         
     }
 
@@ -84,7 +83,7 @@ function Publication_Forms()
         fData.append("text", txt)
         fData.append("image", file)
         publicationService.modifyOne(param.id ,fData, headers)
-        .then( navigate('/', {replace: true}))
+        .then(navigate("/"))
     }
 
     return(

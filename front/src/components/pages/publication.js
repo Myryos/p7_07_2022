@@ -3,6 +3,7 @@ import {Button, Container, Image} from 'react-bootstrap'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import publicationService from '../../services/publication.service'
 import useAuth from '../../hooks/useAuth'
+import jwt from 'jwt-decode'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import '../../styles/components/parts/css/button_custom.css'
 import '../../styles/components/parts/css/likeButton.css'
@@ -22,6 +23,8 @@ function Publication()
     const [likeactive, setlikeactive] = useState(false)
     const [dislikeactive, setdislikeactive] = useState(false)
 
+    const [isAuthorized, setAuthorize] = useState(false)
+
     const token = JSON.parse(localStorage.getItem('user')).accessToken
     let headers = {
         headers: {
@@ -36,7 +39,31 @@ function Publication()
             publicationService.getOne(param.id, headers)
             .then((res) => {
                 setData(res)
+                if(jwt(auth.auth.accessToken).userId === res.userId || JSON.stringify(auth.auth.role) === process.env.REACT_APP_ADMIN)  
+                {
+                    setAuthorize(true)
+                }
+                else
+                {
+                    setAuthorize(false)
+                }
+                res.usersLiked.map((user) =>
+                {
+                    if (user === jwt(auth.auth.accessToken).userId)
+                    {
+                        setlikeactive(true)
+                        setdislikeactive(false)
+                    }
+                })
+                res.usersDisliked.map((user) => {
+                    if (user === jwt(auth.auth.accessToken).userId)
+                    {
+                        setlikeactive(false)
+                        setdislikeactive(true)
+                    }
+                })
             })
+           
             setlike(data.like)
             setdislike(data.dislike)
             setLoad(false)
@@ -46,29 +73,47 @@ function Publication()
     }, [isLoaded, setLoad])
     const likef = () =>
     {
+        let dataSend = {}
         if(likeactive && !dislikeactive)
         {
             setlikeactive(false)
             setlike(like-1)
+            dataSend= {
+                like : 0
+            }
+            publicationService.likeHandler(param.id, dataSend, headers)
         }
         if(!likeactive && !dislikeactive)
         {
             setlikeactive(true)
             setlike(like+1)
+           dataSend = {
+                like : 1
+            }
+            publicationService.likeHandler(param.id, dataSend, headers)
         }
 
     }
     const dislikef = () =>
     {
+        let dataSend = {}
         if(dislikeactive && !likeactive)
         {
             setdislikeactive(false)
             setdislike(dislike-1)
+            dataSend= {
+                like : 0
+            }
+            publicationService.likeHandler(param.id, dataSend, headers)
         }
         if(!dislikeactive && !likeactive)
         {
+            dataSend= {
+                like : -1
+            }
             setdislikeactive(true)
             setdislike(dislike+1)
+            publicationService.likeHandler(param.id, dataSend, headers)
         }
     }
 
@@ -81,24 +126,27 @@ function Publication()
     }
     
     return(
-        <Container className='border d-flex flex-column flex-lg-row flex-wrap justify-content-lg-start'>
+        <Container className='d-flex flex-column flex-lg-row flex-wrap justify-content-lg-start'>
             <Container>
                 <NavLink to='/'><Button variant='link'><i className="bi bi-arrow-left"></i></Button></NavLink>
             </Container>
-            <Container className=' border d-flex flex-column flex-lg-row justify-content-evenly'>
-                <Container className='border align-self-center align-self-lg-start  w-25  mx-1'>
-                    <Image className='border my-3 mx-1' src={data.urlImg}/>
+            <Container className='d-flex flex-column flex-lg-row justify-content-evenly'>
+                <Container className='d-flex align-self-center align-self-lg-start  mx-1'>
+                    <Image className='my-3 mx-auto shadow' src={data.urlImg}/>
                 </Container>
-                <Container className='border m-1 align-self-center align-self-lg-end w-50'>
-                    <p className='border mx-3'>{data.text}</p>
+                <Container className='d-flex align-items-center  m-1 align-self-center align-self-lg-end w-50 h-100 '>
+                    <p className='mx-auto '>{data.text}</p>
                 </Container>
             </Container>
             <Container className='d-flex flex-column flex-lg-row justify-content-evenly'>
-                <Container className='border align-self-lg-start my-3 mx-auto mx-lg-1 w-25 d-flex justify-content-evenly'>
-                    <NavLink to={`/modify-publication/${param.id}`} className='border mx-3 my-2 btn-custom'><Button>Modify</Button></NavLink>
-                    <Button className='border mx-3 my-2 btn-custom' onClick={deleteBtn}>Delete</Button>
+                { isAuthorized && (
+                    <Container className='align-self-lg-start my-3 mx-auto mx-lg-1 w-25 d-flex justify-content-evenly'>
+                    <NavLink to={`/modify-publication/${param.id}`} className='mx-3 my-2'><Button className='btn-custom'>Modify</Button></NavLink>
+                    <Button className='mx-3 my-2 btn-custom' onClick={deleteBtn}>Delete</Button>
                 </Container>
-                <Container className='border justify-content-evenly align-self-lg-end my-3 mx-auto mx-lg-1 w-25 d-flex'>
+                )}
+                
+                <Container className='justify-content-evenly align-self-lg-end my-3 mx-auto mx-lg-1 w-25 d-flex'>
                     <Button className={[likeactive ? 'likeActive' : null,'likeButton mx-3  my-2'].join(' ')} onClick={likef}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
                             <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>

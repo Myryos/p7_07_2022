@@ -25,7 +25,7 @@ export const RequiredAuth = ( { children } ) => {
       isExp = true
       window.location.reload()
     }
-  }, 1000 * 60)
+  }, 1000 * 10)
  
   if( Object.keys(auth).length === 0 ){
     return <Navigate to='/login' state={{path: location.pathname}}/>

@@ -29,7 +29,7 @@ exports.signup = (req, res) => {
                 email : req.body.email,
                 password: hash,
                 refreshToken: '',
-                roles:[255]
+                role: 255
             });
             User.save()
                 .then(() => {
@@ -45,7 +45,6 @@ exports.signup = (req, res) => {
 };
 
 exports.login = (req, res) => {
-    console.log(req.body.password)
     const mail = req.body.email
     user.findOne({email:  mail}, (error, userFound) => {
         if(error)
@@ -60,53 +59,11 @@ exports.login = (req, res) => {
                 console.log(valid)
                 accessToken = jwt.sign(
                 {userId: userFound._id},
-                process.env.ACCESS_TOKEN_SECRET, //Devrais etre mis dans une variables .env
-                {expiresIn: process.env.ACCESS_TOKEN_EXPIRE}//Devrais etre mis dans une variables .env
+                process.env.ACCESS_TOKEN_SECRET, 
+                {expiresIn: process.env.ACCESS_TOKEN_EXPIRE}
             )
-            res.json({ accessToken: accessToken})
+            res.json({ accessToken: accessToken, role: userFound.role })
         }
-
-           
-            
-            /*user.findOneAndUpdate(
-                {_id : userFound._id}, 
-                {refreshToken: refreshToken}, 
-                (error, updated) => {
-                    if(error)
-                    {
-                        res.status(400).json({error: error})
-                    }
-                    if(updated)
-                    {
-                        
-                    }
-            })*/
         })
     })
 };
-
-
-exports.refreshMyToken = (req, res) => {
-    if(!req.cookies.jwt) return res.status(401)
-    const refreshToken = req.cookies.jwt
-    user.findOne({refreshToken: refreshToken}, (error, userFound) => {
-        if(!userFound) return res.status(403)
-        if(userFound)
-        {
-            jwt.verify(
-                refreshToken, 
-                process.env.REFRESH_TOKEN_SECRET, 
-                (error, decoded) => {
-                    const newAccessToken = jwt.sign(
-                    {email : decoded.email},
-                    process.env.ACCESS_TOKEN_SECRET,
-                    {expiresIn: process.env.ACCESS_TOKEN_EXPIRE})
-                res.json({accessToken: newAccessToken})
-            })
-            if(error)
-            {
-                res.status(400).jsom({error : error})
-            }
-        }
-    })
-}

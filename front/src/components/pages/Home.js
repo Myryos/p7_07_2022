@@ -24,14 +24,11 @@ function Home()
     return (
         <Container className="d-flex flex-row flex-wrap my-3">
             {datas.map((item, i) => {
-                return <NavLink to={`/publication/${item._id}`} className='w-25 h-25 mx-3 shadow'><Card key={item + ':' + i+1}>
+                return <NavLink to={`/publication/${item._id}`} className='w-25 h-25 m-3 shadow'><Card key={item + ':' + i+1}>
                     <Card.Img src={item.urlImg}/>
                     <Card.ImgOverlay><Card.Title className="cardTitle"><span>{i + 1}</span></Card.Title></Card.ImgOverlay>
                 </Card></NavLink>
             })}
-            <NavLink to="/new-publication" className="position-absolute bottom-0 end-0"><Button><i className="bi bi-plus-circle"></i></Button></NavLink>
-
-
         </Container>)
     
 }
