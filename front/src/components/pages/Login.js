@@ -12,13 +12,13 @@ const LOG_IN_URL = 'api/auth/login'
 function LogIn()
 {
     const mailRef = useRef();
-    const errRef = useRef()
 
 
     const [mail, setMail] = useState('')
     const [password, setPasswrd]  = useState('')
 
     const [errMsg, setErrMsg] = useState('')
+    const [isError, setError] = useState(false)
 
     useEffect(() => {
         mailRef.current.focus()
@@ -37,20 +37,13 @@ function LogIn()
 
         authService.login(mail, password)
         .then((res) => {
-            setAuth({role: res.role, accessToken: res.accessToken})
+            setAuth({accessToken: res.accessToken})
             setMail('')
             setPasswrd('')
             navigate('/', {replace:true})
         })
         .catch((err) => {
-            if(!err?.response)
-                setErrMsg('No Server Response')
-            else if(err.response?.status === 400)
-                setErrMsg('Missing Email or Password')
-            else if(err.response.status === 401)
-                setErrMsg('Unauthorized')
-            else
-                setErrMsg('Login Failed')
+            setErrMsg(JSON.stringify(err)) 
         })
     }
     return(
@@ -82,6 +75,7 @@ function LogIn()
                     required
                     />
                 </Form.Group>
+                <p>{errMsg}</p>
                 <Button className='m-3 mx-auto btn-custom' type='submit' >Log In</Button> 
             </Form>
        </Container>

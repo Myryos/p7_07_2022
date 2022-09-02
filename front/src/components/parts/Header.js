@@ -19,7 +19,7 @@ function Header()
     }
     
     return (
-        <nav className='navbar vw-100'>
+        <nav className='navbar vw-100 pb-4'>
             <Row xs={{cols: 1}} lg={{cols:2}} className='d-flex flex-column flex-lg-row w-100 flex-lg-nowrap'>
                 <Col className='mx-auto p-3 my-3 d-flex justify-content-center justify-content-lg-start'>
                      <NavLink to='/' className='navbar-brand mx-auto'><Image src={logo} className='img-logo'/></NavLink>

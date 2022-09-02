@@ -56,13 +56,13 @@ exports.login = (req, res) => {
                 res.status(400).json({error: error})
             if(valid)
             {
-                console.log(valid)
                 accessToken = jwt.sign(
-                {userId: userFound._id},
+                {userId: userFound._id,
+                role: userFound.role},
                 process.env.ACCESS_TOKEN_SECRET, 
                 {expiresIn: process.env.ACCESS_TOKEN_EXPIRE}
             )
-            res.json({ accessToken: accessToken, role: userFound.role })
+            res.json({ accessToken: accessToken })
         }
         })
     })

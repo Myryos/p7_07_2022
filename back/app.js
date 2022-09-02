@@ -22,7 +22,7 @@ const limit = rateLimiter({
   legacyHeaders: false
 })
 
-mongoose.connect(`mongodb+srv://${process.env.USR}:${process.env.PASSWRD}@cluster0.iuqwlzh.mongodb.net/?retryWrites=true&w=majority`, //User et Mdp devrais etre dans une variable d'environement
+mongoose.connect(`mongodb+srv://${process.env.USR}:${process.env.PASSWRD}@cluster0.iuqwlzh.mongodb.net/?retryWrites=true&w=majority`, 
 {
     useUnifiedTopology: true
 })
@@ -37,12 +37,12 @@ app.all('*', function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     res.setHeader("Cross-Origin-Resource-Policy", "cross-orgin");
-    res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+    //res.setHeader("Cross-Origin-Embedder-Policy", "require-corp"); //Decommentez si vous voulez utilise l'allow origin '*'
     next();
   });
 
 app.use(cookieParser())
-app.use(morgan('combined', {stream: winston.stream}));
+//app.use(morgan('combined', {stream: winston.stream})); //Decommentez si vous voulez utilise le Log
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/", limit);

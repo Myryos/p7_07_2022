@@ -24,7 +24,7 @@ function Home()
     return (
         <Container className="d-flex flex-row flex-wrap my-3">
             {datas.map((item, i) => {
-                return <NavLink to={`/publication/${item._id}`} className='w-25 h-25 m-3 shadow'><Card key={item + ':' + i+1}>
+                return <NavLink to={`/publication/${item._id}`} className='w-25 h-25 m-3 shadow' key={item._id}><Card>
                     <Card.Img src={item.urlImg}/>
                     <Card.ImgOverlay><Card.Title className="cardTitle"><span>{i + 1}</span></Card.Title></Card.ImgOverlay>
                 </Card></NavLink>
