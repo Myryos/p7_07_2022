@@ -8,7 +8,7 @@ This file will help you for initiate the project
 
 ### The client
 
-![logo](logoReadMe.png)
+![logo](logoReadMe.svg)
 
 Groupomania is a retail group and one of our best client (if not the best client) 
 
