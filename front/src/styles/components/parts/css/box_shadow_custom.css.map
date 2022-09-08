@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAIA,AAAA,WAAW,AAAA,MAAM,CACjB;EACI,UAAU,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,CCLpB,OAAO,CDKsB,UAAU;CAC/C",
+    "mappings": "AAEA,AAAA,WAAW,AAAA,MAAM,CACjB;EACI,YAAY,ECHP,OAAO,CDGU,UAAU;EAChC,UAAU,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,OAAO,CCJpB,OAAO,CDIsB,UAAU;CAC/C",
     "sources": [
         "../box_shadow_custom.scss",
         "../../../variable.scss"

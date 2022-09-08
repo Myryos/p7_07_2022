@@ -5,3 +5,33 @@
 {
     color: $second !important;
 }
+
+.link-return-arrow
+{
+    width: 2em;
+    height: 2em;
+}
+
+.link-return-arrow:focus
+{
+    color: $first !important;
+    border-color: $first !important;
+}
+.link-return-arrow:hover
+{
+    border-color: $first !important;
+}
+
+.return-arrow
+{
+    color: $first !important;
+    width: 2em;
+    height: 2em;
+}
+
+.return-arrow:focus
+{
+    border-color: $first !important;
+    box-shadow: 0 0 0 0.25rem $first !important;
+}
+

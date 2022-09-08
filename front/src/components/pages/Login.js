@@ -5,6 +5,7 @@ import useAuth  from '../../hooks/useAuth'
 import authService from '../../services/auth.service'
 import '../../styles/components/parts/css/box_shadow_custom.css'
 import '../../styles/components/parts/css/button_custom.css'
+import '../../styles/components/parts/css/err-message.css'
 
 const LOG_IN_URL = 'api/auth/login'
 
@@ -18,7 +19,8 @@ function LogIn()
     const [password, setPasswrd]  = useState('')
 
     const [errMsg, setErrMsg] = useState('')
-    const [isError, setError] = useState(false)
+    const [isErrMail, setErrMail] = useState(false)
+    const [isErrPass, setErrPass] = useState(false)
 
     useEffect(() => {
         mailRef.current.focus()
@@ -35,15 +37,26 @@ function LogIn()
     {
         e.preventDefault()
 
+        setErrMail(false)
+        setErrPass(false)
+        setErrMsg('') 
+
         authService.login(mail, password)
         .then((res) => {
-            setAuth({accessToken: res.accessToken})
-            setMail('')
-            setPasswrd('')
-            navigate('/', {replace:true})
-        })
-        .catch((err) => {
-            setErrMsg(JSON.stringify(err)) 
+            console.log(res)
+            if(res !== undefined)
+            {
+                setAuth({accessToken: res.accessToken})
+                setMail('')
+                setPasswrd('')
+                navigate('/', {replace:true})
+            }
+            if(res === undefined)
+            {
+                setErrMail(true)
+                setErrPass(true)
+                setErrMsg('Erreur(s) : Paire login/Mot de passe est incorrect')
+            }
         })
     }
     return(
@@ -59,6 +72,7 @@ function LogIn()
                     autoComplete='off'
                     placeholder='Enter Email' 
                     className='box_custom' 
+                    isInvalid={isErrMail === false ? false : true}
                     onChange={ (e) => setMail(e.target.value)}
                     value={mail}
                     required
@@ -70,12 +84,13 @@ function LogIn()
                     id='paswword'
                     name='password'
                     type='password' placeholder='Password' className='box_custom'
+                    isInvalid={isErrPass === false ? false : true}
                     onChange={(e) => setPasswrd(e.target.value)}
                     value={password}
                     required
                     />
                 </Form.Group>
-                <p>{errMsg}</p>
+                <p className='err-message'>{errMsg}</p>
                 <Button className='m-3 mx-auto btn-custom' type='submit' >Log In</Button> 
             </Form>
        </Container>

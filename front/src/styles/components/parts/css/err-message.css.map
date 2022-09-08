@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,YAAY,CAAA;EACR,KAAK,ECJF,OAAO;CDKb",
+    "sources": [
+        "../err-message.scss",
+        "../../../variable.scss"
+    ],
+    "names": [],
+    "file": "err-message.css"
+}

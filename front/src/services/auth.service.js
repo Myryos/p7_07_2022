@@ -10,12 +10,14 @@ class AuthService {
     login(email, password)
     {
         return axios.post('api/auth/login', JSON.stringify({email: email, password: password}))
-        .then(res => {
+        .then((res) => {
             if(res.data.accessToken)
                 localStorage.setItem("user", JSON.stringify(res.data))
             return res.data
         })
-        .catch(error => {console.log(error)})
+        .catch((err) => {
+            console.log(err.response.data.message)
+        })
     }
     logout()
     {

@@ -105,9 +105,6 @@ exports.modifyOne = (req, res) => {
     .then((user) => {
         Publication.findOne({_id: req.params.id})
         .then((publi) => {
-            console.log(`first test : ${publi.userId == req.auth.userId }, resultat attendu : `)
-            console.log(`seconde test : ${user.role == process.env.ROLE_ADMIN}, resultat attendu : `)
-            console.log(`all test : ${publi.userId == req.auth.userId || user.role == process.env.ROLE_ADMIN}, resultat attendu : `)
             if(publi.userId == req.auth.userId || user.role == process.env.ROLE_ADMIN)
             {
                 const fn = publi.urlImg.split('/images/')[1]
@@ -136,14 +133,10 @@ exports.modifyOne = (req, res) => {
 }
 
 exports.deleteOne = (req, res) => {
-    console.log(req.auth.userId)
     User.findOne({userId: req.auth.userId})
     .then((user) => {
         Publication.findOne({_id: req.params.id})
         .then(publi => {
-            console.log(`first test : ${publi.userId == req.auth.userId }, resultat attendu : FALSE`)
-            console.log(`seconde test : ${user.role == process.env.ROLE_ADMIN}, resultat attendu : TRUE`)
-            console.log(`all test : ${publi.userId == req.auth.userId || user.role == process.env.ROLE_ADMIN}, resultat attendu : TRUE`)
             if(publi.userId == req.auth.userId || user.role == process.env.ROLE_ADMIN)
             {
                 const filename = publi.urlImg.split('/images/')[1];

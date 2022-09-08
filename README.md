@@ -47,7 +47,17 @@ In *App.js*
 If you want use the origins ('*') change the value line 35 and uncomment the line 40
 ##### Log Files
 If you want use my log file uncomment the line 45
-
 ### ENV
 
 For the .env files contact me [here](mailto:herveboutonnet@outlook.com?subject=[Github]%20ENV%20files)
+
+### Restore DB
+In the project you will find a dump directory use it with the Mongo DB Command Tool 100 like this 
+:point_down::point_down::point_down:
+```
+mongorestore --uri mongodb+srv://herve:<PASSWORD>@cluster0.iuqwlzh.mongodb.net 
+```
+
+All information needed like the password is in the .env file for back-end. 
+
+Refer to the section ENV for the ENV files.

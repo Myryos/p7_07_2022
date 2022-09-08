@@ -13,6 +13,7 @@ class PublicationService {
         .then((res) => {
             return res.data
         })
+        .catch((err) => {console.log('Je vais m enerver')})
     }
     getOne = (id, headers) => {
         return axios.get(`/api/publication/${id}`, headers)

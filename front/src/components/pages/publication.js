@@ -128,7 +128,7 @@ function Publication()
     return(
         <Container className='d-flex flex-column flex-lg-row flex-wrap justify-content-lg-start'>
             <Container>
-                <NavLink to='/'><Button variant='link'><i className="bi bi-arrow-left"></i></Button></NavLink>
+                <NavLink to='/' className='link-return-arrow d-flex'><Button variant='link return-arrow m-auto d-flex justify-content-center'><i className="bi bi-arrow-left align-self-center"></i></Button></NavLink>
             </Container>
             <Container className='d-flex flex-column flex-lg-row justify-content-evenly'>
                 <Container className='d-flex align-self-center align-self-lg-start  mx-1'>

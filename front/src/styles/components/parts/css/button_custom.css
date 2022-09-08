@@ -1,4 +1,30 @@
 .btn-custom {
   color: #FFD7D7 !important;
 }
+
+.link-return-arrow {
+  width: 2em;
+  height: 2em;
+}
+
+.link-return-arrow:focus {
+  color: #FD2D01 !important;
+  border-color: #FD2D01 !important;
+}
+
+.link-return-arrow:hover {
+  border-color: #FD2D01 !important;
+}
+
+.return-arrow {
+  color: #FD2D01 !important;
+  width: 2em;
+  height: 2em;
+}
+
+.return-arrow:focus {
+  border-color: #FD2D01 !important;
+  -webkit-box-shadow: 0 0 0 0.25rem #FD2D01 !important;
+          box-shadow: 0 0 0 0.25rem #FD2D01 !important;
+}
 /*# sourceMappingURL=button_custom.css.map */

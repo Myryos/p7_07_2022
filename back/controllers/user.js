@@ -49,21 +49,28 @@ exports.login = (req, res) => {
     user.findOne({email:  mail}, (error, userFound) => {
         if(error)
         {
-            res.status(400).json({error: error, });
+            console.log('error #1 : ' + error)
+            return res.status(401).json({message: 'Paire login/Mot de passe est incorrect'})
         }
-        bcrypt.compare(req.body.password, userFound.password, (error, valid) => {
-            if(error || !valid)
-                res.status(400).json({error: error})
-            if(valid)
-            {
-                accessToken = jwt.sign(
-                {userId: userFound._id,
-                role: userFound.role},
-                process.env.ACCESS_TOKEN_SECRET, 
-                {expiresIn: process.env.ACCESS_TOKEN_EXPIRE}
-            )
-            res.json({ accessToken: accessToken })
+        if(userFound)
+        {
+            bcrypt.compare(req.body.password, userFound.password, (error, valid) => {
+                if(error || !valid)
+                {
+                    console.log('error #2 : ' + error)
+                    return res.status(401).json({message: 'Paire login/Mot de passe est incorrect'})
+                }
+                if(valid)
+                {
+                    accessToken = jwt.sign(
+                    {userId: userFound._id,
+                    role: userFound.role},
+                    process.env.ACCESS_TOKEN_SECRET, 
+                    {expiresIn: process.env.ACCESS_TOKEN_EXPIRE}
+                )
+                res.json({ accessToken: accessToken })
+            }
+            })
         }
-        })
     })
 };

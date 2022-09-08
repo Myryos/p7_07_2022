@@ -1,4 +1,5 @@
 .box_custom:focus {
+  border-color: #FFD7D7 !important;
   -webkit-box-shadow: 0 0 0 0.25rem #FFD7D7 !important;
           box-shadow: 0 0 0 0.25rem #FFD7D7 !important;
 }
